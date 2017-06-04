@@ -1,0 +1,13 @@
+{
+  "name": "node-cloudatcost",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/KevinDyer/node-cloudatcost.git",
+  "author": "Kevin Dyer <kevindy@brewmaster.lab>",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "superagent": "^3.5.2",
+    "winston": "^2.3.1"
+  }
+}
