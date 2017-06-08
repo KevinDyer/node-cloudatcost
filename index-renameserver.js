@@ -2,16 +2,19 @@
   'use strict';
 
   const logger = require('winston');
+  const program = require('commander');
   const CloudAtCost = require('./lib/cloudatcost');
+
+  program
+    .option('-s, --server-id [serverId]', 'Server ID')
+    .option('-n, --name [name]', 'Name')
+    .parse(process.argv);
+
   const cloudAtCost = new CloudAtCost();
-  cloudAtCost.makeRequest({pathname: '/api/v1/listservers.php'})
+  cloudAtCost.makeRequest({pathname: '/api/v1/renameserver.php', method: 'POST', body: {sid: program.serverId, name: program.name}})
   .then((res) => {
     const body = JSON.parse(res.text);
-    const servers = body.data;
-    console.log('\tSID\t\tIP\t\tLabel');
-    servers.forEach((server) => {
-      console.log(`\t${server.sid}\t${server.ip}\t${server.label || server.servername}`);
-    });
+    console.log(`\t${body.serverid}:\t${body.result}`);
   })
   .catch((err) => {
     const body = JSON.parse(err.response.text);

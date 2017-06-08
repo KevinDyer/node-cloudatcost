@@ -4,13 +4,14 @@
   const logger = require('winston');
   const CloudAtCost = require('./lib/cloudatcost');
   const cloudAtCost = new CloudAtCost();
-  cloudAtCost.makeRequest({pathname: '/api/v1/listservers.php'})
+  cloudAtCost.makeRequest({pathname: '/api/v1/listtemplates.php'})
   .then((res) => {
     const body = JSON.parse(res.text);
-    const servers = body.data;
-    console.log('\tSID\t\tIP\t\tLabel');
-    servers.forEach((server) => {
-      console.log(`\t${server.sid}\t${server.ip}\t${server.label || server.servername}`);
+    const templates = body.data;
+    templates.sort((a, b) => a.ce_id - b.ce_id);
+    console.log('\tID\t\tName');
+    templates.forEach((template) => {
+      console.log(`\t${template.ce_id}\t${template.name}`);
     });
   })
   .catch((err) => {
