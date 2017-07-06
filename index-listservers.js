@@ -8,9 +8,10 @@
   .then((res) => {
     const body = JSON.parse(res.text);
     const servers = body.data;
-    console.log('\tSID\t\tIP\t\tLabel');
+    console.log('\tSID\t\tIP\t\tLabel\tStatus');
     servers.forEach((server) => {
-      console.log(`\t${server.sid}\t${server.ip}\t${server.label || server.servername}`);
+      console.log(`\t${server.sid}\t${server.ip}\t${server.label || server.servername}\t${server.status}`);
+      // console.log(require('util').inspect(server, {colors: true, depth: null }));
     });
   })
   .catch((err) => {

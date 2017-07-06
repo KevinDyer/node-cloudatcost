@@ -8,9 +8,10 @@
   .then((res) => {
     const body = JSON.parse(res.text);
     const tasks = body.data;
-    console.log('\tID\t\tAction\t\tStatus');
+    console.log('\tID\t\tAction\t\tStatus\t\tServer ID');
     tasks.forEach((task) => {
-      console.log(`\t${task.cid}  ${task.action}  ${task.status}`);
+      console.log(`\t${task.idf}\t${task.action}${(8 > task.action.length ? '\t' : '')}\t${task.status}${(8 > task.status.length ? '\t' : '')}\t${task.serverid}`);
+      // console.log(require('util').inspect(task, {colors: true, depth: null }));
     });
   })
   .catch((err) => {
